@@ -121,6 +121,7 @@ ALTER TABLE webinars ENABLE ROW LEVEL SECURITY;
 CREATE POLICY "Public articles view" ON articles FOR SELECT USING (true);
 CREATE POLICY "Public courses view" ON courses FOR SELECT USING (true);
 CREATE POLICY "Public webinars view" ON webinars FOR SELECT USING (true);
+
 3. Konfigurasi Environment (.env.local)
 Buat file baru bernama .env.local di folder root proyek Anda.
 
