@@ -165,15 +165,15 @@ const nextConfig = {
   },
 };
 module.exports = nextConfig;
+
+
 🚀 Cara Menjalankan Proyek
 Setelah semua konfigurasi di atas selesai:
+Jalankan Server Development di CMD:
 
-Jalankan Server Development:
-
-Bash
 
 npm run dev
-Buka Aplikasi:
+
 
 Website Publik: Buka http://localhost:3000
 
