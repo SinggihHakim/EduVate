@@ -56,7 +56,7 @@ Proyek ini mencakup website publik yang di-render di server untuk kecepatan maks
 
 Ikuti langkah-langkah ini untuk menjalankan proyek secara lokal.
 
-### 1. Klona & Instalasi
+### 1. Clonning & Instalasi
 
 ```bash
 # 1. Klona repositori (Ganti dengan URL repo Anda)
