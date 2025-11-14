@@ -1,0 +1,251 @@
+================================================================================
+   DOKUMENTASI LENGKAP PROYEK WEBSITE "EDUVATE"
+================================================================================
+
+DAFTAR ISI:
+1.  PENDAHULUAN & TECH STACK
+2.  PERSIAPAN & INSTALASI (SETUP)
+3.  KONFIGURASI DATABASE (SUPABASE)
+4.  KONFIGURASI ENVIRONMENT (.ENV)
+5.  PENJELASAN STRUKTUR FILE
+6.  PENJELASAN KODE PER FILE (DETAIL)
+7.  PANDUAN PENGGUNAAN (USER MANUAL)
+8.  KONSEP TEKNIS: MENGAPA JS DAN JSX? 
+9.  TROUBLESHOOTING & SOLUSI ERROR
+
+================================================================================
+1. PENDAHULUAN & TECH STACK
+================================================================================
+
+EduVate adalah portal edukasi modern yang menyediakan artikel, rekomendasi kursus,
+dan jadwal webinar seputar teknologi dan AI. Website ini memiliki fitur:
+- Halaman publik yang responsif dan interaktif.
+- Pencarian artikel real-time.
+- Dashboard Admin lengkap (CRUD) untuk mengelola konten.
+- Sistem Login Admin sederhana namun aman.
+
+TECH STACK:
+- Framework: Next.js 16 (App Router)
+- Bahasa: JavaScript (JSX)
+- Styling: Tailwind CSS
+- Database: Supabase (PostgreSQL)
+- Animasi: Framer Motion
+- Ikon: Lucide React
+
+================================================================================
+2. PERSIAPAN & INSTALASI (SETUP)
+================================================================================
+
+Langkah-langkah untuk menjalankan proyek ini dari awal:
+
+1.  Pastikan Node.js sudah terinstal (versi 18.17 atau lebih baru).
+2.  Buat folder proyek dan instal dependensi:
+
+    npx create-next-app@latest eduvate
+    # (Pilih: Yes untuk Tailwind, Yes untuk App Router, No untuk TypeScript)
+
+    cd eduvate
+
+3.  Instal library tambahan yang digunakan:
+
+    npm install @supabase/supabase-js framer-motion lucide-react clsx tailwind-merge use-debounce
+
+================================================================================
+3. KONFIGURASI DATABASE (SUPABASE)
+================================================================================
+
+Masuk ke Dashboard Supabase -> SQL Editor, dan jalankan script berikut:
+
+-- 1. Tabel Artikel
+CREATE TABLE articles (
+    id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+    title TEXT NOT NULL,
+    slug TEXT UNIQUE NOT NULL,
+    content TEXT,
+    excerpt TEXT,
+    author TEXT DEFAULT 'Tim EduVate',
+    cover_image TEXT,
+    created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+-- 2. Tabel Kursus
+CREATE TABLE courses (
+    id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+    title TEXT NOT NULL,
+    description TEXT,
+    platform TEXT,
+    link TEXT,
+    image TEXT,
+    created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+-- 3. Tabel Webinar
+CREATE TABLE webinars (
+    id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+    title TEXT NOT NULL,
+    speaker TEXT,
+    date_time TIMESTAMPTZ,
+    registration_link TEXT,
+    image TEXT,
+    created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+-- 4. Row Level Security (RLS)
+ALTER TABLE articles ENABLE ROW LEVEL SECURITY;
+ALTER TABLE courses ENABLE ROW LEVEL SECURITY;
+ALTER TABLE webinars ENABLE ROW LEVEL SECURITY;
+
+-- 5. Policy (Public Read Access)
+CREATE POLICY "Public articles view" ON articles FOR SELECT USING (true);
+CREATE POLICY "Public courses view" ON courses FOR SELECT USING (true);
+CREATE POLICY "Public webinars view" ON webinars FOR SELECT USING (true);
+
+================================================================================
+4. KONFIGURASI ENVIRONMENT (.ENV)
+================================================================================
+
+Buat file `.env.local` di root folder proyek:
+
+NEXT_PUBLIC_SUPABASE_URL=https://[PROJECT-ID].supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=[ANON-KEY]
+SUPABASE_SERVICE_ROLE_KEY=[SERVICE-ROLE-KEY] (Rahasia untuk Admin)
+
+# Login Admin Manual
+ADMIN_USERNAME=admin
+ADMIN_PASSWORD=rahasia123
+
+================================================================================
+5. PENJELASAN STRUKTUR FILE
+================================================================================
+
+eduvate/
+├── app/                       (App Router Next.js)
+│   ├── actions.js             (Backend Logic: Login, CRUD)
+│   ├── layout.js              (Root Layout)
+│   ├── page.js                (Homepage)
+│   ├── admin/                 (Halaman Admin)
+│   ├── artikel/               (Halaman List & Detail Artikel)
+│   ├── kursus/                (Halaman List Kursus)
+│   ├── webinar/               (Halaman List Webinar)
+│   └── login/                 (Halaman Login)
+├── components/                (Komponen UI Reusable)
+│   ├── Card.jsx               (Kartu konten pintar)
+│   ├── ClientLayout.jsx       (Wrapper untuk sembunyikan navbar di admin)
+│   ├── Navbar.jsx             (Navigasi Atas)
+│   └── ... (Footer, Hero, SearchInput)
+├── lib/                       (Koneksi Database)
+│   ├── supabase.js            (Client Publik)
+│   └── supabase-admin.js      (Client Admin)
+└── next.config.js             (Config Gambar & Domain)
+
+================================================================================
+6. PENJELASAN KODE PER FILE (DETAIL)
+================================================================================
+
+A. KONFIGURASI
+   - next.config.js: Mengatur `remotePatterns` untuk mengizinkan gambar dari
+     domain luar (Unsplash, YouTube, Wikipedia) dan mengizinkan SVG (`dangerouslyAllowSVG`).
+   - tailwind.config.js: Menambahkan font 'Outfit' dan warna neon kustom.
+
+B. BACKEND (app/actions.js)
+   - Berjalan di server ('use server').
+   - Menggunakan `await cookies()` (standar Next.js 15/16).
+   - Berisi fungsi `login`, `logout`, `create...`, `update...`, `delete...`.
+   - Menggunakan `supabaseAdmin` untuk bypass RLS saat menulis data.
+
+C. FRONTEND ADMIN/DASHBOARD (app/admin/AdminClientComponent.jsx)
+   - Menggunakan 'use client' untuk interaktivitas.
+   - Mengelola State untuk Menu Aktif, Mode (List/Create), dan Data.
+   - Memisahkan `<form>` dari `<table>` untuk mencegah error hidrasi HTML.
+   - Menggunakan Framer Motion untuk animasi transisi yang halus.
+
+D. KOMPONEN CARD (components/Card.jsx)
+   - Komponen "Pintar": Mendeteksi apakah link internal atau eksternal.
+   - Menggunakan `unoptimized={true}` pada `<Image>` untuk mencegah error saat
+     memuat gambar placeholder SVG atau gambar dari domain yang bermasalah.
+
+================================================================================
+7. PANDUAN PENGGUNAAN (USER MANUAL)
+================================================================================
+
+1. **Halaman Publik:** Akses `/` untuk melihat beranda. Navigasi ke menu Artikel,
+   Kursus, atau Webinar untuk melihat konten.
+2. **Login Admin:** Akses `/login`. Masukkan kredensial dari `.env`.
+3. **Dashboard:**
+   - Gunakan Sidebar kiri untuk pindah antar kategori.
+   - Klik "Tambah Baru" untuk menambah konten.
+   - Klik Ikon Pensil untuk mengedit konten (Formulir akan terisi otomatis).
+   - Klik Ikon Sampah untuk menghapus konten.
+   - Klik "Keluar" di sidebar bawah untuk logout.
+
+================================================================================
+8. KONSEP TEKNIS: MENGAPA JS DAN JSX?
+================================================================================
+
+Dalam proyek ini, Anda akan melihat penggunaan ekstensi `.js` dan `.jsx`.
+Berikut adalah penjelasan detail mengenai perbedaannya dan alasannya.
+
+A. APA BEDANYA?
+   - **JS (JavaScript):** Bahasa pemrograman standar logika web.
+     Browser (Chrome, dll) mengerti kode ini secara langsung.
+   - **JSX (JavaScript XML):** Syntax extension (perluasan sintaks).
+     Cara menulis struktur mirip HTML di dalam file JavaScript.
+     Browser TIDAK mengerti JSX (harus dicompile dulu oleh Next.js).
+
+B. PERBANDINGAN (KELEBIHAN & KEKURANGAN)
+
+   1. JavaScript Murni (Tanpa JSX)
+      [+] Universal: Jalan di semua environment JS tanpa build tool.
+      [+] Efisien untuk Logika: Sangat cepat untuk fungsi matematika/data.
+      [-] Buruk untuk UI: Membuat tampilan (DOM) sangat bertele-tele dan sulit dibaca.
+          Contoh: `React.createElement('div', {class: 'box'}, 'Hello')`
+
+   2. JSX (React)
+      [+] Visual & Deklaratif: Struktur kode terlihat persis seperti hasil HTML-nya.
+      [+] Komponen: Membungkus logika & tampilan jadi satu (misal: `<Card />`).
+      [-] Butuh Compiler: Tidak bisa langsung jalan di browser, harus diproses dulu.
+      [-] Aturan Ketat: Tag harus ditutup, `class` menjadi `className`, dll.
+
+C. MENGAPA KITA MENGGUNAKAN KEDUANYA? (KENAPA TIDAK SALAH SATU SAJA?)
+   Sebenarnya secara teknis Next.js bisa memproses JSX di dalam file `.js`.
+   Namun, kita membedakannya demi **Konvensi dan Keterbacaan**:
+
+   1. **File `.js` (Logika & Routing):**
+      - Digunakan pada `app/page.js`, `lib/supabase.js`, `app/actions.js`.
+      - Menandakan file ini adalah standar Next.js atau murni logika backend.
+
+   2. **File `.jsx` (Komponen Visual):**
+      - Digunakan pada `components/Card.jsx`, `components/Navbar.jsx`.
+      - Memberi sinyal visual pada developer: "File ini berisi UI/Tampilan HTML".
+      - Membantu Text Editor (VS Code) memberikan saran (autocomplete) HTML yang lebih baik.
+
+   **Kesimpulan:** JSX adalah "Gula Pemanis" agar developer tidak pusing menulis UI
+   menggunakan logika matematika murni.
+
+================================================================================
+9. TROUBLESHOOTING & SOLUSI ERROR UMUM
+================================================================================
+
+1. **Error: Invalid src prop / Hostname not configured**
+   - Penyebab: Link gambar dari domain luar (misal: Bing, Wikipedia) belum diizinkan.
+   - Solusi: Cek `next.config.js`, pastikan ada konfigurasi `hostname: '**'`.
+   - Wajib: Restart server (`npm run dev`) setelah mengubah config.
+
+2. **Error: cookies().set is not a function**
+   - Penyebab: Di Next.js 15/16, akses cookies bersifat asynchronous.
+   - Solusi: Tambahkan `await` sebelum `cookies()`.
+     Contoh: `const cookieStore = await cookies();`
+
+3. **Error: In HTML, <form> cannot be a child of <tbody>**
+   - Penyebab: Struktur HTML salah di Dashboard Admin.
+   - Solusi: Pastikan kode `<form>` berada DI LUAR tag `<table>`.
+
+4. **Error: Source Map / 404 on Images**
+   - Penyebab: Cache Next.js rusak atau gambar placeholder SVG ditolak.
+   - Solusi 1: Hapus folder `.next` dan restart server.
+   - Solusi 2: Tambahkan `unoptimized={true}` pada komponen `<Image />`.
+
+================================================================================
+
+note : 
+Untuk link dibawah(footer) belum bisa digunakan karena masih belum ada rencana ingin seperti apa jadi hanya show saja agar penuh.

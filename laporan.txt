@@ -1,0 +1,217 @@
+==================================================
+              LAPORAN PENGEMBANGAN WEBSITE
+                       "EDUVATE"
+==================================================
+
+Proyek      : EduVate - Portal Edukasi
+Tema        : Empowering Youth in the Era of Disruption
+Penyusun    : ATOS PERSON.corp
+Tanggal     : 14 November 2025
+
+--------------------------------------------------
+Dokumen ini merinci proses perancangan, teknologi
+yang digunakan, dan fungsionalitas dari website
+EduVate.
+--------------------------------------------------
+
+
+==================================================
+1. PENDAHULUAN
+==================================================
+
+Latar Belakang:
+Di tengah era disrupsi digital, di mana Kecerdasan Buatan (AI) dan teknologi
+baru mengubah lanskap industri secara masif, generasi muda dituntut untuk
+beradaptasi dengan cepat. Kebutuhan akan sumber belajar yang relevan,
+terkurasi, dan terpusat menjadi sangat penting.
+
+Tujuan Proyek:
+"EduVate" dibangun sebagai jawaban atas tantangan tersebut. Ini adalah sebuah
+portal edukasi modern yang bertujuan untuk memberdayakan generasi muda
+(youth) dengan menyediakan konten terkurasi seputar AI, Teknologi, dan
+Kreativitas.
+
+Ruang Lingkup:
+Proyek ini mencakup dua bagian utama:
+1.  Frontend (Halaman Publik): Website yang dapat diakses umum, menampilkan
+    artikel, daftar kursus, dan jadwal webinar.
+2.  Backend (Halaman Admin): Dashboard terproteksi untuk mengelola
+    seluruh konten website (Artikel, Kursus, Webinar) melalui
+    operasi CRUD (Create, Read, Update, Delete).
+
+
+==================================================
+2. PERANCANGAN
+==================================================
+
+Perancangan proyek dibagi menjadi dua aspek utama: Arsitektur Sistem
+dan Desain Antarmuka (UI/UX).
+
+A. Arsitektur Sistem
+Proyek ini mengadopsi arsitektur modern berbasis Next.js App Router:
+
+1.  Pemisahan Komponen:
+    -   Server Components: Digunakan untuk sebagian besar halaman (cth:
+        app/page.js, app/artikel/page.js). Komponen ini dirender di
+        server, memungkinkannya mengambil data (data fetching) langsung
+        dari database (Supabase) secara aman. Ini menghasilkan load halaman
+        yang sangat cepat dan optimal untuk SEO.
+    -   Client Components: Ditandai dengan 'use client'. Digunakan hanya
+        untuk komponen yang membutuhkan interaktivitas browser, seperti
+        Navbar (deteksi scroll), SearchInput (debounce input), dan
+        keseluruhan Admin Dashboard (state, form, dsb).
+
+2.  Logika Backend (Server Actions):
+    -   Proyek ini tidak menggunakan API Route tradisional. Sebagai gantinya,
+        logika backend (Login, CRUD) ditangani oleh "Server Actions"
+        (file `app/actions.js`).
+    -   Fungsi 'use server' ini berjalan aman di server dan dipanggil
+        langsung dari form di Client Component, menyederhanakan alur
+        data dan meningkatkan keamanan.
+
+3.  Alur Autentikasi Admin:
+    -   Login menggunakan kredensial yang disimpan aman di Environment
+        Variables (.env.local).
+    -   Saat login berhasil, Server Action membuat HTTP-only Cookie
+        (`admin_session`).
+    -   Halaman `app/admin/page.js` (Server Component) akan mengecek
+        keberadaan cookie ini. Jika tidak ada, pengguna otomatis
+        dialihkan (redirect) ke `/login`.
+
+B. Perancangan Desain (UI/UX)
+-   Vibe: Futuristik, bersih, dan "techy".
+-   Palet Warna: Menggunakan "Dark Mode" (`bg-neutral-950`) sebagai
+    latar belakang utama untuk menonjolkan konten.
+-   Aksen: Warna Neon (Cyan `#00ffff` dan Lime `#39FF14`) digunakan
+    untuk tombol interaktif (CTA) dan highlight, memberikan kesan
+    "disruptive" namun tetap profesional.
+-   Efek Visual: Menerapkan efek "Glassmorphism" (latar belakang buram
+    transparan) pada Navbar untuk tampilan modern saat di-scroll.
+-   Tipografi: Menggunakan font 'Outfit' dari Google Fonts, yang
+    memiliki karakter geometris, modern, dan mudah dibaca.
+-   Animasi: Menggunakan `framer-motion` untuk animasi halus (text
+    reveal, hover effects) yang meniru gaya "React Bits".
+
+
+==================================================
+3. TEKNOLOGI & BAHASA PEMROGRAMAN
+==================================================
+
+Berikut adalah daftar teknologi dan bahasa yang digunakan:
+
+1.  Next.js (v16+):
+    -   Framework React utama.
+    -   App Router: Digunakan untuk routing berbasis folder.
+    -   Server Actions: Digunakan untuk semua logika backend (CRUD/Auth).
+
+2.  React.js:
+    -   Pustaka dasar untuk membangun UI.
+    -   Hooks: (useState, useEffect) digunakan untuk mengelola state di
+        Client Components.
+
+3.  JavaScript (ES6+) & JSX:
+    -   JS digunakan untuk semua logika.
+    -   JSX (JavaScript XML) digunakan untuk menulis sintaks mirip HTML di
+        dalam komponen React.
+
+4.  Supabase (Database):
+    -   Platform Backend-as-a-Service (BaaS) berbasis PostgreSQL.
+    -   Digunakan untuk menyimpan data Artikel, Kursus, dan Webinar.
+    -   Row Level Security (RLS) diaktifkan untuk keamanan data.
+
+5.  Tailwind CSS:
+    -   Framework CSS utility-first untuk styling cepat dan kustomisasi
+        desain (termasuk Dark Mode dan warna neon).
+
+6.  Framer Motion:
+    -   Library animasi React untuk efek visual seperti text reveal (Hero)
+      dan animasi hover pada Card.
+
+7.  Lucide React:
+    -   Library ikon SVG yang ringan dan konsisten.
+
+8.  use-debounce:
+    -   Library kecil yang digunakan di `SearchInput.jsx` untuk menunda
+      eksekusi pencarian saat pengguna mengetik, mengurangi beban server.
+
+==================================================
+4. FITUR FITUR
+==================================================
+
+A. Fitur Halaman Publik (Frontend)
+
+1.  Navigasi:
+    -   Navbar sticky dengan efek glassmorphism.
+    -   Menu responsif untuk perangkat mobile.
+    -   Pemisahan Navbar/Footer otomatis (hilang di /admin dan /login).
+
+2.  Halaman Utama (Homepage):
+    -   Hero section dengan animasi teks (Framer Motion).
+    -   Bagian statis "Mengapa EduVate?".
+    -   Preview 3 artikel terbaru, 3 kursus terbaru, dan 3 webinar
+        mendatang (diambil dari Supabase).
+
+3.  Halaman Artikel (/artikel):
+    -   Menampilkan grid semua artikel.
+    -   Fitur pencarian (Search) real-time dengan debounce.
+    -   Halaman Detail Artikel (`/artikel/[slug]`) dengan layout baca
+        yang bersih dan SEO-friendly.
+
+4.  Halaman Kursus & Webinar (/kursus, /webinar):
+    -   Menampilkan grid semua kursus dan webinar.
+
+5.  Komponen Card Pintar (Card.jsx):
+    -   Mendeteksi link eksternal (misal: YouTube, Udemy) dan
+        otomatis membukanya di tab baru (`target="_blank"`).
+    -   Menampilkan gambar placeholder jika gambar utama gagal dimuat.
+    -   Menggunakan `unoptimized={true}` pada Next/Image untuk mencegah
+        error render SVG dari `placehold.co`.
+
+B. Fitur Halaman Admin (Backend)
+
+1.  Autentikasi:
+    -   Halaman `/login` yang aman (verifikasi via Server Action).
+    -   Halaman `/admin` terproteksi oleh cookie HTTP-only.
+    -   Tombol Logout yang aman (menghapus cookie via Server Action).
+
+2.  Dashboard (/admin):
+    -   Layout sidebar profesional yang responsif.
+    -   Menampilkan statistik total (Jumlah Artikel, Kursus, Webinar).
+    -   Fitur pencarian internal untuk memfilter data di tabel.
+
+3.  Manajemen Konten (Full CRUD):
+    -   Satu antarmuka terpadu untuk mengelola Artikel, Kursus, dan Webinar.
+    -   Create (Tambah): Tombol "Tambah Baru" membuka form kosong.
+    -   Read (Baca): Menampilkan semua data dalam tabel.
+    -   Update (Edit): Tombol "Edit" (ikon pensil) akan membuka form yang
+        sama, namun sudah terisi data yang ada (pre-filled).
+    -   Delete (Hapus): Tombol "Hapus" (ikon sampah) dengan dialog
+        konfirmasi.
+
+4.  Formulir Dinamis:
+    -   Formulir input otomatis beradaptasi berdasarkan menu yang aktif
+        (Form Artikel, Form Kursus, Form Webinar).
+    -   Mendukung input untuk URL gambar (termasuk untuk Webinar).
+
+==================================================
+5. PENUTUP
+==================================================
+
+Proyek EduVate ini berhasil mengimplementasikan sebuah portal web modern,
+performan, dan fungsional. Pemanfaatan arsitektur Next.js 16 (App Router
+dan Server Actions) memungkinkan pengembangan yang efisien di mana logika
+frontend dan backend dapat hidup berdampingan dalam satu codebase tanpa
+mengorbankan keamanan atau performa.
+
+Sistem Admin (CMS) yang dibangun dari nol menyediakan fungsionalitas CRUD
+lengkap yang dibutuhkan klien untuk mengelola konten secara mandiri.
+Seluruh error yang ditemui selama pengembangan, termasuk konfigurasi domain
+gambar, path routing, dan breaking changes Next.js 16, telah berhasil
+diatasi dan didokumentasikan.
+
+Website ini siap untuk di-deploy dan berfungsi sebagai platform edukasi
+yang bermanfaat bagi generasi muda.
+
+================================================================================
+AKHIR DOKUMENTASI
+================================================================================
