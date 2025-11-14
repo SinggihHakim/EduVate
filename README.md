@@ -1,7 +1,7 @@
 # 🔥 EduVate - Portal Edukasi AI & Teknologi
+<img width="2541" height="1411" alt="image" src="https://github.com/user-attachments/assets/8f315ce8-5590-4d8b-91dd-d3d86e56a1ff" />
 
-![EduVate Hero](https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&q=80&w=1200)
-*(Disarankan: Ganti gambar ini dengan screenshot website Anda)*
+
 
 **EduVate** adalah portal edukasi modern yang dibangun dengan **Next.js 16 (App Router)** dan **Supabase**. Sesuai dengan tema **"Empowering Youth in the Era of Disruption"**, website ini berfungsi sebagai platform terkurasi untuk artikel, kursus, dan webinar seputar AI, Teknologi, dan Kreativitas Digital.
 
