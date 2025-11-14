@@ -1,3 +1,4 @@
+// app/kursus/page.jsx
 import { supabase } from '@/lib/supabase';
 import Card from '@/components/Card';
 import { Cpu, SearchX } from 'lucide-react';
@@ -21,7 +22,7 @@ export default async function KursusPage() {
   const courses = await getCourses();
 
   return (
-    <div className="min-h-screen pt-28 pb-20 px-6 bg-linear-to-br from-slate-900 via-slate-900 to-cyan-950">
+    <div className="min-h-screen pt-28 pb-20 px-6 bg-gradient-to-br from-slate-900 via-slate-900 to-cyan-950">
       {/* Background Effects */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-20 left-10 w-72 h-72 bg-cyan-500/10 rounded-full blur-3xl" />
@@ -32,13 +33,13 @@ export default async function KursusPage() {
         {/* Header Section */}
         <div className="text-center mb-16">
           <div className="flex justify-center mb-6">
-            <div className="p-4 bg-linear-to-br from-cyan-500/20 to-blue-500/20 rounded-2xl border border-cyan-500/30 shadow-lg shadow-cyan-500/10">
+            <div className="p-4 bg-gradient-to-br from-cyan-500/20 to-blue-500/20 rounded-2xl border border-cyan-500/30 shadow-lg shadow-cyan-500/10">
               <Cpu className="w-10 h-10 text-cyan-400" />
             </div>
           </div>
           
           <h1 className="text-5xl md:text-6xl font-bold text-white mb-4">
-            <span className="bg-linear-to-r from-cyan-400 to-lime-300 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-cyan-400 to-lime-300 bg-clip-text text-transparent">
               Kursus
             </span>
           </h1>
@@ -59,6 +60,14 @@ export default async function KursusPage() {
                 image={course.image}
                 link={course.link}
                 category={course.platform}
+                duration={course.duration}
+                instructor={course.instructor}
+                rating={course.rating}
+                level={course.level}
+                price={course.price}
+                created_at={course.created_at}
+                learning_objectives={course.learning_objectives}
+                prerequisites={course.prerequisites}
               />
             ))}
           </div>

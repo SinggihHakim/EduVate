@@ -7,27 +7,28 @@ const outfit = Outfit({
   variable: '--font-outfit',
 });
 
+// --- UBAH DI SINI ---
 export const metadata = {
-  title: 'EduVate | Portal Generasi Disruptif',
+  title: {
+    default: 'EduVate - Portal Edukasi AI & Teknologi', // Judul di Halaman Utama
+    template: '%s | EduVate', // Judul di halaman lain (%s = judul spesifik)
+  },
   description: 'Platform edukasi AI, Teknologi, dan Kreativitas untuk pemuda.',
 };
+// --- BATAS PERUBAHAN ---
 
 export default function RootLayout({ children }) {
   return (
     <html lang="id" className={outfit.variable}>
-      {/* PERBAIKAN: Tambahkan suppressHydrationWarning={true} di sini */}
       <body 
         className="bg-neutral-950 text-gray-100 font-sans antialiased"
         suppressHydrationWarning={true}
       >
-        
-        {/* Bungkus konten dengan ClientLayout untuk mengatur Navbar/Footer otomatis */}
         <ClientLayout>
           <main className="min-h-screen">
             {children}
           </main>
         </ClientLayout>
-
       </body>
     </html>
   );
