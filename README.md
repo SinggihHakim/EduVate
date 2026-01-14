@@ -1,83 +1,91 @@
-# 🔥 EduVate - Portal Edukasi AI & Teknologi
-<img width="2541" height="1411" alt="image" src="https://github.com/user-attachments/assets/8f315ce8-5590-4d8b-91dd-d3d86e56a1ff" />
+<div align="center">
 
+# 🚀 EduVate: Portal Edukasi AI & Teknologi
 
+**Empowering Youth in the Era of Disruption**
 
-**EduVate** adalah portal edukasi modern yang dibangun dengan **Next.js 16 (App Router)** dan **Supabase**. Sesuai dengan tema **"Empowering Youth in the Era of Disruption"**, website ini berfungsi sebagai platform terkurasi untuk artikel, kursus, dan webinar seputar AI, Teknologi, dan Kreativitas Digital.
+![Next JS](https://img.shields.io/badge/Next.js_16-black?style=for-the-badge&logo=next.js&logoColor=white)
+![Supabase](https://img.shields.io/badge/Supabase-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white)
+![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
+![Framer Motion](https://img.shields.io/badge/Framer_Motion-0055FF?style=for-the-badge&logo=framer&logoColor=white)
 
-Proyek ini mencakup website publik yang di-render di server untuk kecepatan maksimum, serta Dashboard Admin (CMS) kustom yang fungsional untuk mengelola seluruh konten.
+<img src="https://github.com/user-attachments/assets/8f315ce8-5590-4d8b-91dd-d3d86e56a1ff" alt="EduVate Dashboard" width="100%" style="border-radius: 10px; box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);">
 
----
+[Demo Live (Coming Soon)] • [Laporkan Bug] • [Dokumentasi]
 
-## 🚀 Fitur Utama
-
-### 🌎 Fitur Publik (Frontend)
-
-* **Desain Modern:** Dibuat dengan Tailwind CSS, mengusung tema Dark Mode (`bg-neutral-950`) dengan aksen Neon (Cyan & Lime).
-* **Halaman Dinamis:**
-    * **Homepage:** Menampilkan Hero, keunggulan, serta 3 artikel, kursus, dan webinar terbaru yang diambil dari Supabase.
-    * **Halaman Artikel:** Grid semua artikel dengan fitur **pencarian real-time** (didebounce).
-    * **Halaman Detail Artikel:** Halaman baca yang bersih, SEO-friendly, dan di-render di server.
-    * **Halaman Kursus & Webinar:** Daftar terkurasi dari konten eksternal.
-* **Komponen "Pintar":**
-    * **Smart Card (`Card.jsx`):** Otomatis mendeteksi link eksternal (misal: YouTube/Udemy) dan membukanya di tab baru (`target="_blank"`).
-    * **Smart Image:** Menggunakan `next/image` dengan *fallback* ke placeholder jika gambar utama gagal dimuat.
-* **Animasi Halus:** Menggunakan `Framer Motion` untuk transisi halaman dan efek hover yang elegan.
-
-### 🔒 Fitur Admin (Backend)
-
-* **Login Aman:** Halaman `/login` yang memvalidasi admin menggunakan **Server Action** dan kredensial dari file `.env`.
-* **Dashboard Terproteksi:** Halaman `/admin` dilindungi oleh **HTTP-only Cookie**. Akses dicek di server; jika tidak ada cookie, pengguna otomatis dialihkan ke `/login`.
-* **Layout Profesional:** Antarmuka Dashboard dengan Sidebar yang bersih dan responsif.
-* **Full CRUD (Create, Read, Update, Delete):**
-    * Kelola **Artikel**
-    * Kelola **Kursus**
-    * Kelola **Webinar** (termasuk upload poster)
-* **Formulir Cerdas:** Menggunakan *satu* formulir yang sama untuk mode **Create** (Tambah Baru) dan **Update** (Edit). Form akan otomatis terisi data saat mode Edit.
-* **Pencarian Cepat:** Fitur search di dashboard memfilter data secara instan di sisi klien.
+</div>
 
 ---
 
-## 🛠️ Teknologi & Tech Stack
+## ⚡ Tentang Proyek
 
-* **Framework:** **Next.js 16+** (App Router)
-* **Database:** **Supabase** (PostgreSQL)
-* **Styling:** **Tailwind CSS**
-* **Backend Logic:** **Next.js Server Actions**
-* **Animasi:** **Framer Motion**
-* **UI/Komponen:** **React.js** (Hooks, Client & Server Components)
-* **Ikon:** **Lucide React**
+**EduVate** adalah platform edukasi modern yang dikurasi khusus untuk generasi muda yang ingin mendalami **Artificial Intelligence**, **Teknologi**, dan **Kreativitas Digital**.
+
+Dibangun di atas fondasi **Next.js 16 (App Router)** terbaru, website ini menawarkan performa tinggi dengan *Server-Side Rendering* (SSR) dan manajemen konten yang dinamis melalui **Supabase**. Proyek ini mencakup portal publik yang estetik dan Dashboard Admin yang aman (Protected Routes).
+
+---
+
+## 🔥 Fitur Utama
+
+### 🌍 Portal Publik (Frontend)
+Dirancang dengan nuansa *Dark Mode* (`bg-neutral-950`) dan aksen *Neon* untuk pengalaman visual yang imersif.
+
+| Fitur | Deskripsi |
+| :--- | :--- |
+| ⚡ **Performa Tinggi** | Halaman di-render di server (SSR) untuk SEO dan kecepatan maksimal. |
+| 🔍 **Pencarian Real-time** | Temukan artikel secara instan dengan fitur *debounced search*. |
+| 🎨 **UI Dinamis** | Animasi halus menggunakan **Framer Motion** untuk transisi yang elegan. |
+| 🧩 **Smart Components** | Kartu konten cerdas yang mendeteksi link eksternal dan *fallback* gambar otomatis. |
+| 📱 **Responsif** | Tampilan sempurna di Desktop, Tablet, dan Mobile. |
+
+### 🔒 Panel Admin (CMS)
+Pusat kendali konten yang dilindungi sistem keamanan berlapis.
+
+* **Secure Authentication:** Login admin divalidasi via *Server Actions* & *HTTP-only Cookies*.
+* **Protected Routes:** Middleware cerdas yang memblokir akses tanpa izin.
+* **Unified Form:** Satu formulir pintar untuk *Create* dan *Update* (auto-fill data saat edit).
+* **Full CRUD:** Kelola Artikel, Kursus, dan Webinar (termasuk upload poster).
+* **Instant Filtering:** Cari dan filter data konten di dashboard tanpa *reload*.
+
+---
+
+## 🛠️ Tech Stack
+
+Proyek ini menggunakan teknologi terkini di ekosistem React:
+
+* **Framework:** Next.js 16 (App Router)
 * **Bahasa:** JavaScript (JSX)
-* **Utilities:** `use-debounce` (untuk search)
+* **Database:** Supabase (PostgreSQL + RLS)
+* **Styling:** Tailwind CSS + Lucide React (Icons)
+* **Backend Logic:** Next.js Server Actions
+* **Motion:** Framer Motion
+* **Utils:** `clsx`, `tailwind-merge`, `use-debounce`
 
 ---
 
-## ⚙️ Panduan Instalasi & Konfigurasi
+## ⚙️ Panduan Instalasi (Local Setup)
 
-Ikuti langkah-langkah ini untuk menjalankan proyek secara lokal.
+Ikuti langkah berikut untuk menjalankan EduVate di komputer Anda.
 
-### 1. Clonning & Instalasi
-
+### 1. Clone & Install
 ```bash
-# 1. Klona repositori (Ganti dengan URL repo Anda)
+# Clone repositori
 git clone [https://github.com/SinggihHakim/EduVate.git](https://github.com/SinggihHakim/EduVate.git)
-
-# 2. Masuk ke folder proyek
 cd EduVate
 
-# 3. Instal semua dependensi
+# Instal dependensi
 npm install
-(Pastikan Anda sudah menginstal: @supabase/supabase-js framer-motion lucide-react clsx tailwind-merge use-debounce jika package.json Anda belum lengkap)
 
-2. Setup Database (Supabase)
-Buat Project baru di Supabase.
+```
 
-Setelah project siap, navigasi ke SQL Editor.
+### 2. Setup Database (Supabase)
 
-Salin dan jalankan (paste & run) seluruh script SQL di bawah ini:
+Buat proyek baru di [Supabase Dashboard](https://supabase.com/), lalu jalankan query berikut di **SQL Editor**:
 
-SQL
+<details>
+<summary>📂 <strong>Klik untuk melihat Script SQL</strong></summary>
 
+```sql
 -- 1. Tabel Artikel
 CREATE TABLE articles (
     id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
@@ -117,40 +125,38 @@ ALTER TABLE articles ENABLE ROW LEVEL SECURITY;
 ALTER TABLE courses ENABLE ROW LEVEL SECURITY;
 ALTER TABLE webinars ENABLE ROW LEVEL SECURITY;
 
--- 5. Buat Policy agar data bisa dibaca publik
+-- 5. Kebijakan Akses Publik (PENTING!)
 CREATE POLICY "Public articles view" ON articles FOR SELECT USING (true);
 CREATE POLICY "Public courses view" ON courses FOR SELECT USING (true);
 CREATE POLICY "Public webinars view" ON webinars FOR SELECT USING (true);
 
-3. Konfigurasi Environment (.env.local)
-Buat file baru bernama .env.local di folder root proyek Anda.
+```
 
-Buka Dashboard Supabase -> Settings -> API.
+</details>
 
-Salin URL Proyek dan Kunci anon public.
+### 3. Konfigurasi Environment
 
-Salin juga Kunci service_role secret (RAHASIA).
+Buat file `.env.local` di root folder dan isi dengan kredensial Supabase Anda:
 
-Isi file .env.local seperti template di bawah ini:
+```env
+# Supabase Configuration (Settings -> API)
+NEXT_PUBLIC_SUPABASE_URL=[https://id-proyek-anda.supabase.co](https://id-proyek-anda.supabase.co)
+NEXT_PUBLIC_SUPABASE_ANON_KEY=kunci-anon-publik-anda
+SUPABASE_SERVICE_ROLE_KEY=kunci-service-role-rahasia-anda
 
-Bash
-
-# File: .env.local
-
-# Ambil dari Supabase API Settings
-NEXT_PUBLIC_SUPABASE_URL=https://<ID-PROYEK-ANDA>.supabase.co
-NEXT_PUBLIC_SUPABASE_ANON_KEY=<KUNCI_ANON_PUBLIK_ANDA>
-SUPABASE_SERVICE_ROLE_KEY=<KUNCI_SERVICE_ROLE_SECRET_ANDA>
-
-# Kredensial untuk login admin
+# Admin Credentials
 ADMIN_USERNAME=admin
 ADMIN_PASSWORD=rahasia123
-4. Konfigurasi next.config.js
-Pastikan file next.config.js Anda mengizinkan semua domain gambar agar tidak terjadi error saat mengambil gambar dari sumber acak (Unsplash, Bing, Wikipedia, dll).
 
-JavaScript
+```
 
-// File: next.config.js
+> ⚠️ **Penting:** Jangan pernah push `SUPABASE_SERVICE_ROLE_KEY` ke repository publik!
+
+### 4. Konfigurasi Next.js
+
+Pastikan `next.config.js` mengizinkan domain gambar eksternal:
+
+```javascript
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
@@ -159,65 +165,57 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "**", // Mengizinkan semua domain
+        hostname: "**", // Mengizinkan gambar dari semua sumber
       },
     ],
   },
 };
 module.exports = nextConfig;
 
+```
 
-🚀 Cara Menjalankan Proyek
-Setelah semua konfigurasi di atas selesai:
-Jalankan Server Development di CMD:
+---
 
+## 🚀 Cara Menjalankan
 
+Jalankan server pengembangan:
+
+```bash
 npm run dev
 
+```
 
-Website Publik: Buka http://localhost:3000
+* 🌐 **Website:** [http://localhost:3000](https://www.google.com/search?q=http://localhost:3000)
+* 🔑 **Admin Login:** [http://localhost:3000/login](https://www.google.com/search?q=http://localhost:3000/login)
 
-Halaman Login Admin: Buka http://localhost:3000/login
+---
 
-(Gunakan username & password dari file .env.local Anda untuk masuk)
+## 📂 Struktur Folder
 
-📂 Struktur Folder Proyek
-/
+```text
+EduVate/
 ├── app/
-│   ├── actions.js          # (Backend) Logika Server Actions (Auth, CRUD)
-│   ├── layout.js           # Layout global
-│   ├── page.js             # Halaman utama (Homepage)
-│   │
-│   ├── admin/              # Folder Halaman Admin (Protected)
-│   │   ├── page.js         # Server component (cek cookie, fetch data)
-│   │   └── AdminClientComponent.jsx # UI Dashboard (Client component)
-│   │
-│   ├── artikel/
-│   │   ├── page.js         # Halaman list artikel (dengan search)
-│   │   └── [slug]/
-│   │       └── page.js     # Halaman detail artikel
-│   │
-│   ├── kursus/
-│   │   └── page.js         # Halaman list kursus
-│   │
-│   ├── webinar/
-│   │   └── page.js         # Halaman list webinar
-│   │
-│   └── login/
-│       └── page.js         # Halaman form login
-│
+│   ├── actions.js          # Backend Logic (Server Actions)
+│   ├── admin/              # Protected Admin Routes
+│   ├── login/              # Admin Login Page
+│   ├── artikel/            # Public Article Pages
+│   └── ...
 ├── components/
-│   ├── Card.jsx            # Komponen kartu (Artikel, Kursus, Webinar)
-│   ├── ClientLayout.jsx    # Wrapper (Show/Hide Navbar/Footer)
-│   ├── Footer.jsx
-│   ├── Hero.jsx
-│   ├── Navbar.jsx
-│   └── SearchInput.jsx
-│
+│   ├── Card.jsx            # Smart Content Card
+│   ├── Navbar.jsx          # Navigation
+│   └── ...
 ├── lib/
-│   ├── supabase.js         # Klien Supabase (untuk Publik/Frontend)
-│   └── supabase-admin.js   # Klien Supabase (untuk Admin/Backend)
-│
-├── .env.local              # File Rahasia (API Keys, Login)
-├── next.config.js          # Konfigurasi Next.js (termasuk domain gambar)
-└── tailwind.config.js      # Konfigurasi Tailwind (font, warna neon)
+│   ├── supabase.js         # Public Client (Anon)
+│   └── supabase-admin.js   # Admin Client (Service Role)
+└── ...
+
+```
+
+---
+
+<div align="center">
+
+Dibuat dengan 💻 dan ☕ oleh **Singgih Hakim**.
+
+</div>
+
