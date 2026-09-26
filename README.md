@@ -1,13 +1,13 @@
 <div align="center">
 
-# 🚀 EduVate: Portal Edukasi AI & Teknologi
+# EduVate: Portal Edukasi AI & Teknologi
 
 **Empowering Youth in the Era of Disruption**
 
-![Next JS](https://img.shields.io/badge/Next.js_16-black?style=for-the-badge&logo=next.js&logoColor=white)
-![Supabase](https://img.shields.io/badge/Supabase-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white)
-![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
-![Framer Motion](https://img.shields.io/badge/Framer_Motion-0055FF?style=for-the-badge&logo=framer&logoColor=white)
+![Next JS](https://img.shields.io/badge/Next.js_16-black?style=for-the-badge\&logo=next.js\&logoColor=white)
+![Supabase](https://img.shields.io/badge/Supabase-3ECF8E?style=for-the-badge\&logo=supabase\&logoColor=white)
+![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge\&logo=tailwind-css\&logoColor=white)
+![Framer Motion](https://img.shields.io/badge/Framer_Motion-0055FF?style=for-the-badge\&logo=framer\&logoColor=white)
 
 <img src="https://github.com/user-attachments/assets/8f315ce8-5590-4d8b-91dd-d3d86e56a1ff" alt="EduVate Dashboard" width="100%" style="border-radius: 10px; box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);">
 
@@ -17,7 +17,7 @@
 
 ---
 
-## ⚡ Tentang Proyek
+## Tentang Proyek
 
 **EduVate** adalah platform edukasi modern yang dikurasi khusus untuk generasi muda yang ingin mendalami **Artificial Intelligence**, **Teknologi**, dan **Kreativitas Digital**.
 
@@ -25,20 +25,22 @@ Dibangun di atas fondasi **Next.js 16 (App Router)** terbaru, website ini menawa
 
 ---
 
-## 🔥 Fitur Utama
+## Fitur Utama
 
-### 🌍 Portal Publik (Frontend)
+### Portal Publik (Frontend)
+
 Dirancang dengan nuansa *Dark Mode* (`bg-neutral-950`) dan aksen *Neon* untuk pengalaman visual yang imersif.
 
-| Fitur | Deskripsi |
-| :--- | :--- |
-| ⚡ **Performa Tinggi** | Halaman di-render di server (SSR) untuk SEO dan kecepatan maksimal. |
-| 🔍 **Pencarian Real-time** | Temukan artikel secara instan dengan fitur *debounced search*. |
-| 🎨 **UI Dinamis** | Animasi halus menggunakan **Framer Motion** untuk transisi yang elegan. |
-| 🧩 **Smart Components** | Kartu konten cerdas yang mendeteksi link eksternal dan *fallback* gambar otomatis. |
-| 📱 **Responsif** | Tampilan sempurna di Desktop, Tablet, dan Mobile. |
+| Fitur                   | Deskripsi                                                                          |
+| :---------------------- | :--------------------------------------------------------------------------------- |
+| **Performa Tinggi**     | Halaman di-render di server (SSR) untuk SEO dan kecepatan maksimal.                |
+| **Pencarian Real-time** | Temukan artikel secara instan dengan fitur *debounced search*.                     |
+| **UI Dinamis**          | Animasi halus menggunakan **Framer Motion** untuk transisi yang elegan.            |
+| **Smart Components**    | Kartu konten cerdas yang mendeteksi link eksternal dan *fallback* gambar otomatis. |
+| **Responsif**           | Tampilan sempurna di Desktop, Tablet, dan Mobile.                                  |
 
-### 🔒 Panel Admin (CMS)
+### Panel Admin (CMS)
+
 Pusat kendali konten yang dilindungi sistem keamanan berlapis.
 
 * **Secure Authentication:** Login admin divalidasi via *Server Actions* & *HTTP-only Cookies*.
@@ -49,7 +51,7 @@ Pusat kendali konten yang dilindungi sistem keamanan berlapis.
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 Proyek ini menggunakan teknologi terkini di ekosistem React:
 
@@ -63,19 +65,19 @@ Proyek ini menggunakan teknologi terkini di ekosistem React:
 
 ---
 
-## ⚙️ Panduan Instalasi (Local Setup)
+## Panduan Instalasi (Local Setup)
 
 Ikuti langkah berikut untuk menjalankan EduVate di komputer Anda.
 
 ### 1. Clone & Install
+
 ```bash
 # Clone repositori
-git clone [https://github.com/SinggihHakim/EduVate.git](https://github.com/SinggihHakim/EduVate.git)
+git clone https://github.com/SinggihHakim/EduVate.git
 cd EduVate
 
 # Instal dependensi
 npm install
-
 ```
 
 ### 2. Setup Database (Supabase)
@@ -83,7 +85,7 @@ npm install
 Buat proyek baru di [Supabase Dashboard](https://supabase.com/), lalu jalankan query berikut di **SQL Editor**:
 
 <details>
-<summary>📂 <strong>Klik untuk melihat Script SQL</strong></summary>
+<summary><strong>Klik untuk melihat Script SQL</strong></summary>
 
 ```sql
 -- 1. Tabel Artikel
@@ -129,7 +131,6 @@ ALTER TABLE webinars ENABLE ROW LEVEL SECURITY;
 CREATE POLICY "Public articles view" ON articles FOR SELECT USING (true);
 CREATE POLICY "Public courses view" ON courses FOR SELECT USING (true);
 CREATE POLICY "Public webinars view" ON webinars FOR SELECT USING (true);
-
 ```
 
 </details>
@@ -140,17 +141,16 @@ Buat file `.env.local` di root folder dan isi dengan kredensial Supabase Anda:
 
 ```env
 # Supabase Configuration (Settings -> API)
-NEXT_PUBLIC_SUPABASE_URL=[https://id-proyek-anda.supabase.co](https://id-proyek-anda.supabase.co)
+NEXT_PUBLIC_SUPABASE_URL=https://id-proyek-anda.supabase.co
 NEXT_PUBLIC_SUPABASE_ANON_KEY=kunci-anon-publik-anda
 SUPABASE_SERVICE_ROLE_KEY=kunci-service-role-rahasia-anda
 
 # Admin Credentials
 ADMIN_USERNAME=admin
 ADMIN_PASSWORD=rahasia123
-
 ```
 
-> ⚠️ **Penting:** Jangan pernah push `SUPABASE_SERVICE_ROLE_KEY` ke repository publik!
+> **Penting:** Jangan pernah push `SUPABASE_SERVICE_ROLE_KEY` ke repository publik!
 
 ### 4. Konfigurasi Next.js
 
@@ -170,27 +170,26 @@ const nextConfig = {
     ],
   },
 };
-module.exports = nextConfig;
 
+module.exports = nextConfig;
 ```
 
 ---
 
-## 🚀 Cara Menjalankan
+## Cara Menjalankan
 
 Jalankan server pengembangan:
 
 ```bash
 npm run dev
-
 ```
 
-* 🌐 **Website:** [http://localhost:3000](https://www.google.com/search?q=http://localhost:3000)
-* 🔑 **Admin Login:** [http://localhost:3000/login](https://www.google.com/search?q=http://localhost:3000/login)
+* **Website:** http://localhost:3000
+* **Admin Login:** http://localhost:3000/login
 
 ---
 
-## 📂 Struktur Folder
+## Struktur Folder
 
 ```text
 EduVate/
@@ -208,14 +207,12 @@ EduVate/
 │   ├── supabase.js         # Public Client (Anon)
 │   └── supabase-admin.js   # Admin Client (Service Role)
 └── ...
-
 ```
 
 ---
 
 <div align="center">
 
-Dibuat dengan 💻 dan ☕ oleh **Singgih Hakim**.
+Dibuat dengan kode dan kopi oleh **Singgih Hakim**.
 
 </div>
-
